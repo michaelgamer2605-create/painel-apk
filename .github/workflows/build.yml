@@ -1,6 +1,7 @@
 name: Build APK
 
-on: [push]
+on:
+  push:
 
 jobs:
   build:
@@ -9,20 +10,23 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: actions/setup-python@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
       with:
         python-version: 3.10
 
-    - run: |
+    - name: Instalar dependências
+      run: |
         pip install buildozer cython
         sudo apt update
-        sudo apt install -y zip unzip openjdk-17-jdk
+        sudo apt install -y zip unzip openjdk-17-jdk python3-pip
 
-    - run: buildozer init
+    - name: Build APK
+      run: |
+        buildozer android debug
 
-    - run: buildozer -v android debug
-
-    - uses: actions/upload-artifact@v3
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
       with:
         name: apk
         path: bin/*.apk
