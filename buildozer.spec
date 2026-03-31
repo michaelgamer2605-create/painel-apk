@@ -1,18 +1,16 @@
 [app]
 
-title = Painel PRO
-package.name = painelpro
+title = PainelApp
+package.name = painelapp
 package.domain = org.test
 
 source.dir = .
-source.include_exts = py,png,jpg,kv,json
+source.include_exts = py
+
+version = 1.0
 
 requirements = python3,kivy
 
 orientation = portrait
+
 fullscreen = 0
-
-android.permissions = INTERNET
-
-[buildozer]
-log_level = 2
