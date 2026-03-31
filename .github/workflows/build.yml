@@ -10,16 +10,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.10
-
     - name: Instalar dependências
       run: |
-        pip install buildozer cython
         sudo apt update
-        sudo apt install -y zip unzip openjdk-17-jdk python3-pip
+        sudo apt install -y git zip unzip openjdk-17-jdk python3-pip python3-setuptools
+
+    - name: Instalar Buildozer
+      run: |
+        pip install --upgrade pip
+        pip install buildozer cython
+
+    - name: Inicializar Buildozer
+      run: |
+        buildozer init || true
 
     - name: Build APK
       run: |
